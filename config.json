@@ -1,0 +1,16 @@
+{
+    "server": {
+        "timezone": "Asia/Seoul",
+        "databaseUri": "sqlite:///fever.sql",
+        "artifactsDir": "artifacts",
+        "passwordsFile": "users.txt",
+        "anonymousLoginEnabled": "true",
+        "printConfigOnStartup": "true"
+    },
+    "printer": {
+        "file": "/dev/usb/lp0",
+        "textColumns": "40",
+        "imageWidth": "340",
+        "numLinefeeds": "2"
+    }
+}
