@@ -1,6 +1,7 @@
 from base64 import b64decode
 import logging
 from pathlib import Path
+from pprint import pprint
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -20,7 +21,6 @@ logger = logging.getLogger("main")
 def _configure_app() -> None:
     config = Config()
     if config["server"]["printConfigOnStartup"] == "true":
-        from pprint import pprint
         pprint(config)
 
     printer = Printer()
