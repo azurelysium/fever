@@ -24,11 +24,9 @@ class Config(dict):  # type: ignore
 
     def __init__(self, path: Optional[str] = None) -> None:
         super().__init__()
-        if path is None:
-            path_ = os.environ.get(f"{self.prefix}_CONFIG_JSON", "./config.json")
-        else:
-            path_ = path
-        self.load(path_)
+        self.path = path or os.environ.get(f"{self.prefix}_CONFIG_JSON", "./config.json")
+        if self.path and os.path.exists(self.path):
+            self.load(self.path)
 
     def reload(self) -> None:
         """Reload configuration from a file"""
@@ -47,8 +45,11 @@ class Config(dict):  # type: ignore
 
         self._update_nested(keys[1:], value, target[keys[0]])
 
-    def load(self, path: str) -> None:
+    def load(self, path: Optional[str]) -> None:
         """Load configuration from a file"""
+        if path is None:
+            raise ValueError("Invalid Path")
+
         self.clear()
         with open(path, "r") as file_handle:
             super().__init__(json.load(file_handle))
@@ -68,5 +69,6 @@ class Config(dict):  # type: ignore
 
     def save(self) -> None:
         """Save configuration to a file"""
-        with open(self.path, "w") as file_handle:
-            json.dump(self, file_handle)
+        if self.path:
+            with open(self.path, "w") as file_handle:
+                json.dump(self, file_handle, indent=2)

@@ -9,8 +9,11 @@
     },
     "printer": {
         "file": "/dev/usb/lp0",
-        "textColumns": "40",
+        "textColumns": "30",
         "imageWidth": "340",
-        "numLinefeeds": "2"
+        "numLinefeeds": "2",
+        "printHeader": "true",
+        "printDivider": "true",
+        "dividerChar": "-"
     }
 }
