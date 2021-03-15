@@ -112,7 +112,6 @@ async def reprint(req: Request, print_id: str) -> ResponsePayload:
     """Re-print"""
     config = Config()
     database = Database()
-    print_id = database.generate_print_id()
     username = req.state.user_info["username"]
 
     row = database.get_print(print_id)
